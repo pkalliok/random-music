@@ -1,7 +1,6 @@
 
 from random import choice, randint
-# from transform import all_transforms
-all_transforms = [lambda tune: [None if x is None else x + 2 for x in tune]]
+from transform import all_transforms
 
 def maybe(n): return 1 == randint(1, n)
 
