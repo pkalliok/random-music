@@ -5,6 +5,21 @@ def transposer(amount):
 def one_note(tune):
     return tune[0] + [None] * len(tune - 1)
 
+def repeat(tune):
+    half = int(len(tune)/2)
+    start = tune[:half]
+    return start + start
+
+def switch(tune):
+    half = int(len(tune)/2)
+    return tune[half:] + tune[:half]
+
+def reverser(blocksize):
+    return (lambda tune: [note
+        for start in reversed(range(0, len(tune), blocksize))
+        for note in tune[start:start+blocksize]])
+
+
 all_transforms = [transposer(5), transposer(-5), transposer(7), transposer(-7),
-        one_note]
+        one_note, repeat, switch, reverser(2), reverser(4), reverser(8)]
 
