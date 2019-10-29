@@ -3,7 +3,7 @@ import render, generate, sys
 
 def make_tune(initial):
     print('X:1\nM:8/16\nK:D')
-    print(render.render_tune(generate.extend(3, 7, initial)))
+    print(render.render_tune(generate.extend(3, 8, initial)))
 
 def read_melody(argv):
     def maybe_int(x):

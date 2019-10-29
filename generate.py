@@ -12,8 +12,9 @@ def generate_range(chaos, start, end):
 
 def apply_random_transform(chaos, tune):
     start, end = generate_range(chaos, 0, len(tune))
-    transform = choice(all_transforms)
-    return tune[:start] + transform(tune[start:end]) + tune[end:]
+    transform1 = choice(all_transforms)
+    transform2 = choice(all_transforms)
+    return tune[:start] + transform1(transform2(tune[start:end])) + tune[end:]
 
 def transform(chaos, tune):
     if maybe(chaos): return apply_random_transform(chaos, tune)
