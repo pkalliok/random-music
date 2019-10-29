@@ -2,16 +2,18 @@
 notes = ["D", "^D", "E", "=F", "F", "G", "^G", "A", "^A", "B", "c", "^c",
         "d", "^d", "e", "=f", "f", "g", "^g", "a", "^a", "b", "c'", "^c'"]
 
+def is_bar(note): return note in '|\n'
+
 def interpret_note(note):
     if note is None: return ('z', 1)
     return (notes[note + 12], 1)
 
 def reconcile_halves(start, end):
-    note, length = end[0]
-    if note != 'z': return start + end
-    lastnote, oldlength = start[-1]
-    if lastnote == '|': return start + end
-    return start[:-1] + [(lastnote, oldlength + length)] + end[1:]
+    pitch, length = end[0]
+    if pitch != 'z': return start + end
+    lastpitch, oldlength = start[-1]
+    if is_bar(lastpitch): return start + end
+    return start[:-1] + [(lastpitch, oldlength + length)] + end[1:]
 
 def maybe_bar(tune):
     if len(tune) == 8: return [('|', 0)]
@@ -27,7 +29,7 @@ def interpret_tune(tune):
     return reconcile_halves(start, end) + maybe_bar(tune)
 
 def render_note(pitch, length):
-    if pitch in '|\n' or length == 1: return pitch
+    if is_bar(pitch) or length == 1: return pitch
     return pitch + str(length)
 
 def render_tune(tune):
