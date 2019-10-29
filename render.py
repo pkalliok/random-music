@@ -14,19 +14,20 @@ def reconcile_halves(start, end):
     return start[:-1] + [(lastnote, oldlength + length)] + end[1:]
 
 def maybe_bar(tune):
-    if len(tune) != 8: return []
-    return [('|', 0)]
+    if len(tune) == 8: return [('|', 0)]
+    if len(tune) == 32: return [('\n', 0)]
+    return []
 
 def interpret_tune(tune):
     if not tune: return []
     if len(tune) == 1: return [interpret_note(tune[0])]
-    half = len(tune)/2
+    half = int(len(tune)/2)
     start = interpret_tune(tune[:half])
     end = interpret_tune(tune[half:])
     return reconcile_halves(start, end) + maybe_bar(tune)
 
 def render_note(pitch, length):
-    if pitch == '|' or length == 1: return pitch
+    if pitch in '|\n' or length == 1: return pitch
     return pitch + str(length)
 
 def render_tune(tune):
