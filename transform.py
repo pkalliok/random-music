@@ -5,7 +5,7 @@ def transposer(amount):
     return (lambda tune: [None if x is None else x + amount for x in tune])
 
 def one_note(tune):
-    if len(tune) < 1: return tune
+    if len(tune) < 1 or len(tune) > 32: return tune
     return [tune[0]] + [None] * (len(tune) - 1)
 
 def repeat(tune):
