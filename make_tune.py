@@ -1,9 +1,13 @@
 
 import render, generate, sys
 
+def meter(beats):
+    if beats > 4: return beats
+    return meter(2*beats)
+
 def make_tune(initial):
-    print('X:1\nM:8/16\nK:D')
-    print(render.render_tune(generate.extend(3, 8, initial)))
+    print('X:1\nM:%d/16\nK:D' % meter(len(initial)))
+    print(render.render_tune(generate.extend(5, 9, initial)))
 
 def read_melody(argv):
     def maybe_int(x):

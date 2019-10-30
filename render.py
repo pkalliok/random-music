@@ -23,8 +23,8 @@ def reconcile_halves(start, end):
     return start[:-1] + [(lastpitch, oldlength + length)] + end[1:]
 
 def maybe_bar(tune):
-    if len(tune) == 8: return [('|', 0)]
-    if len(tune) == 32: return [('\n', 0)]
+    if 4 < len(tune) <= 8: return [('|', 0)]
+    if 24 < len(tune) <= 48: return [('\n', 0)]
     return []
 
 def interpret_tune(tune):
