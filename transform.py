@@ -10,6 +10,7 @@ def one_note(tune):
 
 def repeat(tune):
     if len(tune) < 2: return tune
+    if len(tune) % 2: return repeat(tune[:-1]) + tune[-1:]
     half = int(len(tune)/2)
     start = tune[:half]
     return start + choice(all_transforms)(start)
