@@ -4,7 +4,7 @@ stamps/install-requisites:
 	touch $@
 
 random.abc: make_tune.py generate.py transform.py render.py
-	python3 $< 0 | tee $@
+	python3 $< 0 z | tee $@
 
 %.midi: %.abc
 	abc2midi $< -o $@

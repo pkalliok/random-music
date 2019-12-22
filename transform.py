@@ -39,7 +39,9 @@ all_transforms = [
         (8, 32, reverser(4)),
         (16, 128, reverser(8)),
         (32, None, reverser(16)),
+        (2, 4, nudger(1)),
         (2, 6, nudger(1)),
+        (4, 8, nudger(2)),
         (4, 12, nudger(2)),
         (8, 24, nudger(4)),
     ]
