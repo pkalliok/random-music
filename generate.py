@@ -16,11 +16,14 @@ def apply_random_transform(chaos, tune):
     transform2 = choice(all_transforms)
     return tune[:start] + transform1(transform2(tune[start:end])) + tune[end:]
 
-def transform(chaos, tune):
-    if maybe(chaos): return apply_random_transform(chaos, tune)
-    return apply_random_transform(chaos, transform(chaos, tune))
+def transform(selection_chaos, iteration_chaos, tune):
+    if maybe(iteration_chaos):
+        return apply_random_transform(selection_chaos, tune)
+    transformed = transform(selection_chaos, iteration_chaos, tune)
+    return apply_random_transform(selection_chaos, transformed)
 
-def extend(chaos, times, tune):
+def extend(selection_chaos, iteration_chaos, times, tune):
     if times == 0: return tune
-    return extend(chaos, times - 1, tune + transform(chaos, tune))
+    return extend(selection_chaos, iteration_chaos, times - 1,
+            tune + transform(selection_chaos, iteration_chaos, tune))
 
