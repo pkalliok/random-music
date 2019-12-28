@@ -12,3 +12,5 @@ random.abc: make_tune.py generate.py transform.py render.py
 play-%: %.midi
 	timidity $<
 
+%.ps: %.abc
+	abcm2ps $< -O $@
