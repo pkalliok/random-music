@@ -20,6 +20,10 @@ def reverser(blocksize):
         for start in reversed(range(0, len(tune), blocksize))
         for note in tune[start:start+blocksize]])
 
+def retrograde(tune):
+    basenote = (tune[0] or 0)
+    return [None if note is None else basenote - note for note in tune]
+
 # weight, min_tune_len, max_tune_len, transformation_function
 all_transforms = [
         (None, None, transposer(5)),
@@ -28,6 +32,7 @@ all_transforms = [
         (None, None, transposer(-7)),
         (None, None, transposer(2)),
         (None, None, transposer(-2)),
+        (None, None, retrograde),
         (2, 16, repeat),
         (4, 24, repeat),
         (8, 32, repeat),

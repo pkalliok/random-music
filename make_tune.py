@@ -7,7 +7,7 @@ def meter(beats):
 
 def make_tune(initial):
     print('X:1\nM:%d/16\nK:D' % meter(len(initial)))
-    print(render.render_tune(generate.extend(3, 5, 10, initial)))
+    print(render.render_tune(generate.extend(2, 5, 10, initial)))
 
 def read_melody(argv):
     def maybe_int(x):
